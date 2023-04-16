@@ -1,0 +1,27 @@
+.movieList {
+   background-color: black;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+.movieItem {
+   margin-bottom: 3rem;
+   margin-left: 1rem;
+}
+.movieImgPoster {
+   width: 150px;
+   height: 230px;
+   object-fit: cover;
+   transition: transform 0.2s ease-out;
+}
+.movieImgBackDrop {
+   width: 10rem;
+   height: 7rem;
+   object-fit: cover;
+   transition: transform 0.2s ease-out;
+}
+
+.movieImgBackDrop:hover,
+.movieImgPoster:hover {
+   transform: scale(1.2);
+}
