@@ -4,9 +4,16 @@ import MovieList from '../../components/MovieList/MovieList';
 import NavBar from '../../components/NavBar/NavBar';
 import { requests } from '../../requestsApi';
 import './Browse.css';
+import useFetch from '../../customHooks/useFetch';
 
 function Browse() {
-   return (
+   const { results } = useFetch(requests.fetchNetflixOriginals);
+
+   return !!!results ? (
+      <div className='loadingContainer'>
+         <div class='loader'></div>
+      </div>
+   ) : (
       <div className='browseContainer'>
          <NavBar />
          <Banner />
