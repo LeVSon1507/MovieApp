@@ -5,39 +5,55 @@ import NavBar from '../../components/NavBar/NavBar';
 import { requests } from '../../requestsApi';
 import './Browse.css';
 import useFetch from '../../customHooks/useFetch';
+import { isEmpty } from 'lodash';
+import LoadingCommon from '../../components/LoadingCommon';
 
 function Browse() {
-   const { results } = useFetch(requests.fetchNetflixOriginals);
+   const { results, isLoading } = useFetch(requests.fetchNetflixOriginals);
 
-   return !!!results ? (
-      <div className='loadingContainer'>
-         <div class='loader'></div>
-      </div>
+   if (isLoading) return <LoadingCommon />;
+
+   return isEmpty(results) ? (
+      <LoadingCommon />
    ) : (
       <div className='browseContainer'>
          <NavBar />
          <Banner />
          <MovieList apiEndpoint={requests.fetchNetflixOriginals} isOriginal={true} />
 
-         <h3>Xu Hướng</h3>
+         <div className='container-title'>
+            <h3 className='title'>Xu Hướng</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchTrending} />
 
-         <h3>Xếp hạng cao</h3>
+         <div className='container-title'>
+            <h3 className='title'>Xếp hạng cao</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchTopRated} />
 
-         <h3>Hành động</h3>
+         <div className='container-title'>
+            <h3 className='title'>Hành động</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchActionMovies} />
 
-         <h3>Hài</h3>
+         <div className='container-title'>
+            <h3 className='title'>Hài</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchComedyMovies} />
 
-         <h3>Kinh dị</h3>
+         <div className='container-title'>
+            <h3 className='title'>Kinh dị</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchHorrorMovies} />
 
-         <h3>Lãng mạng</h3>
+         <div className='container-title'>
+            <h3 className='title'>Lãng mạng</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchRomanceMovies} />
 
-         <h3>Tài liệu</h3>
+         <div className='container-title'>
+            <h3 className='title'>Tài liệu</h3>
+         </div>
          <MovieList apiEndpoint={requests.fetchDocumentaries} />
       </div>
    );

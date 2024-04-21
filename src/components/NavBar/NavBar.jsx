@@ -23,7 +23,7 @@ const NavBar = () => {
       <nav className={`navbar ${navBarClass}`}>
          <div className='container'>
             <Link to='/' className='navbar-title'>
-               Movie App
+               Hôm nay xem gì
             </Link>
             <div className='navbar-search'>
                <Link to='/search' className='navbar-search-link'>

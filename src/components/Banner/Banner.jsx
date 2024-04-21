@@ -2,22 +2,24 @@ import React from 'react';
 import useFetch from '../../customHooks/useFetch';
 import { requests } from '../../requestsApi';
 import './Banner.css';
+import LoadingCommon from '../LoadingCommon';
 
 function Banner() {
    const url = requests.fetchNetflixOriginals;
    const { results, isLoading } = useFetch(url);
-   // Kiểm tra xem đối tượng results có chứa dữ liệu hay không
+
    if (!results || !results.results || results.results.length === 0) {
       return null;
    }
+
    // Lấy ngẫu nhiên một phim từ danh sách các phim trả về
    const randomMovie = results.results[Math.floor(Math.random() * results.results.length)];
 
+   if (isLoading) return <LoadingCommon />;
+
    return (
       <div className='container'>
-         {isLoading ? (
-            <h1 className='loading'>Loading...</h1>
-         ) : (
+         {
             <div className='banner-container'>
                <img
                   src={`https://image.tmdb.org/t/p/original/${randomMovie.backdrop_path}`}
@@ -33,7 +35,7 @@ function Banner() {
                   <p className='banner-overview'>{randomMovie.overview}</p>
                </div>
             </div>
-         )}
+         }
       </div>
    );
 }
