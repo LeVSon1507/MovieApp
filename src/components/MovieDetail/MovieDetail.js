@@ -6,15 +6,18 @@ import YouTube from 'react-youtube';
 import './MovieDetail.css';
 import LoadingCommon from '../LoadingCommon';
 
-function MovieDetail({ movieData, isShowMovieDetail, isBannerList }) {
+function MovieDetail({ movieData, isShowMovieDetail, isBannerList, isBannerMovieDetail }) {
+   console.log('🚀 ~ MovieDetail ~ movieData:', movieData);
    const { id, title, release_date, vote_average, backdrop_path, overview, poster_path, name } =
-      movieData;
+      movieData || {};
    const url = `/movie/${id}/videos?api_key=${API_KEY}`;
    const { results, isLoading } = useFetch(url);
 
-   const trailerMovie = results?.results?.find(movie => {
-      return movie.site === 'YouTube' && (movie.type === 'Trailer' || movie.type === 'Teaser');
-   });
+   const trailerMovie = isBannerMovieDetail
+      ? results.results
+      : results?.results?.find(movie => {
+           return movie.site === 'YouTube' && (movie.type === 'Trailer' || movie.type === 'Teaser');
+        });
 
    const opts = {
       height: '400',

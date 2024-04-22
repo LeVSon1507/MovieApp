@@ -7,7 +7,7 @@ function useFetch(url) {
    const fetchData = async () => {
       setIsLoading(true);
       try {
-         const response = await fetch(`https://api.themoviedb.org/3${url}?language=vi-VN`);
+         const response = await fetch(`https://api.themoviedb.org/3${url}`);
          if (response.ok) {
             const data = await response.json();
             setResults(data);
